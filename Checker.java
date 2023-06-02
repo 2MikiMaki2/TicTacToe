@@ -97,17 +97,17 @@ public class Checker {
 
     public static int dConsCheck(String[][] board, String letter) {
         // Checks diagonals for two consecutive appearances of *letter*
-        int dCount = 0;
-        int dIndex = 1;
-        for (int i = 0; i < 3; i++) {
-            if (board[i][i].equals(letter)) {
-                dCount++;
-            }
-
-            if (dCount == 2) {
-                return dIndex;
-            }
-            dIndex += 4;
+        if (board[0][0].equals(board[1][1])) {
+            return 9;
+        }
+        if (board[2][2].equals(board[1][1])) {
+            return 1;
+        }
+        if (board[0][2].equals(board[1][1])) {
+            return 7;
+        }
+        if (board[2][0].equals(board[1][1])) {
+            return 3;
         }
 
         return -1;

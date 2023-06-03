@@ -45,9 +45,9 @@ public class GameRunner {
             case "Y":
                 System.out.println("Alright, let's play!");
                 String response2 = "";
-
                 int exOrOh = (int)(Math.random() * 10 + 1);
-                if (exOrOh > 0 && exOrOh <= 5){
+                
+            if (exOrOh > 0 && exOrOh <= 5){
                     response2 ="x";
                 }
                 if (exOrOh > 5 && exOrOh <= 10){

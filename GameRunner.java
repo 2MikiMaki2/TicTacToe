@@ -7,6 +7,7 @@ public class GameRunner {
         System.out.println("Hi! Welcome to Tic-Tac-Toe! Do you wanna play a game?");
         System.out.println("Type 'Y' for yes, or type 'N' for no!");
         String response = scan.nextLine();
+        // TODO: Change this if/else statement to switch statement
         if (response.equalsIgnoreCase("Y")){
             System.out.println("Alright, let's play!");
             String response2 = scan.nextLine();

@@ -1,8 +1,5 @@
-/*
- * How will it interact with runner class to be assigned its letter?
- * How will it choose where to place its piece?
- * Computer logic: first tries winning move, then blocks player, if can't do either makes random valid move.
- */
+import java.util.*;
+
 public class ComputerPlayer {
     private String letter;
     private String oppLetter;
@@ -22,54 +19,79 @@ public class ComputerPlayer {
     
     // Computer makes a move by generating random number between 1 and 10
     // TODO: Code full computer logic as described above.
-    public void compMove(GameBoard board) {
+    public boolean compMove(GameBoard board) {
+        String[][] boardArray = board.getBoard();
         // First search if a winning move can be made
-        int hWinMove = Checker.hConsCheck(board.getBoard(), letter);
+        int hWinMove = Checker.hConsCheck(boardArray, letter);
         if (hWinMove != -1) {
-            if (hWinMove % 3 == 0) {
-                hWinMove -= 3;
-                // Call GameBoard placeMove
-            }
             // Call GameBoard placeMove with hWinMove++
+            return true;
         }
-
-        int vWinMove = Checker.vConsCheck(board.getBoard(), letter);
+        int vWinMove = Checker.vConsCheck(boardArray, letter);
         if (vWinMove != -1) {
-            if (vWinMove == 7 || vWinMove == 8 || vWinMove == 9) {
-                vWinMove -= 6;
-                // Call GameBoard placeMove
-            }
             // Call GameBoard placeMove with vWinMove++
+            return true;
         }
-
-        int dWinMove = Checker.dConsCheck(board.getBoard(), letter);
+        int dWinMove = Checker.dConsCheck(boardArray, letter);
         if (dWinMove != -1) {
             // Call GameBoard placeMove
+            return true;
         }
 
         // Second search if blocking move can be made
-        int hBlockMove = Checker.hConsCheck(board.getBoard(), oppLetter);
+        int hBlockMove = Checker.hConsCheck(boardArray, oppLetter);
         if (hBlockMove != -1) {
-            if (hBlockMove % 3 == 0) {
-                hBlockMove -= 3;
-                // Call GameBoard placeMove
-            }
             // Call GameBoard placeMove with hWinMove++
+            return true;
         }
-
-        int vBlockMove = Checker.vConsCheck(board.getBoard(), oppLetter);
+        int vBlockMove = Checker.vConsCheck(boardArray, oppLetter);
         if (vBlockMove != -1) {
-            if (vBlockMove == 7 || vBlockMove == 8 || vBlockMove == 9) {
-                vBlockMove -= 6;
-                // Call GameBoard placeMove
-            }
             // Call GameBoard placeMove with vWinMove++
+            return true;
         }
-
-        int dBlockMove = Checker.dConsCheck(board.getBoard(), oppLetter);
+        int dBlockMove = Checker.dConsCheck(boardArray, oppLetter);
         if (dBlockMove != -1) {
             // Call GameBoard placeMove
+            return true;
         }
+
+        // Third check if corners are empty or center is empty
+        if (Checker.checkIsEmpty(boardArray, 0, 0)) {
+            // Call GameBoard placeMove
+            return true;
+        }
+        if (Checker.checkIsEmpty(boardArray, 2, 0)) {
+            // Call GameBoard placeMove
+            return true;
+        }
+        if (Checker.checkIsEmpty(boardArray, 0, 2)) {
+            // Call GameBoard placeMove
+            return true;
+        }
+        if (Checker.checkIsEmpty(boardArray, 2, 2)) {
+            // Call GameBoard placeMove
+            return true;
+        }
+        if (Checker.checkIsEmpty(boardArray, 1, 1)) {
+            // Call GameBoard placeMove
+            return true;
+        }
+
+        // Finally make random move
+        ArrayList<Integer> emptyIndices = new ArrayList<Integer>();
+        int emptyIndex = 1;
+        for (int r = 0; r < boardArray.length; r++) {
+            for (int c = 0; c < boardArray[r].length; c++) {
+                if (Checker.checkIsEmpty(boardArray, r, c)) {
+                    emptyIndices.add(emptyIndex);
+                }
+                emptyIndex++;
+            }
+        }
+        int randIndex = (int) (Math.random() * (emptyIndices.size()));
+        // Call GameBoard placeMove using hashmap to translate randIndex to a location on 2D array
+
+        return false;
 
     }
 

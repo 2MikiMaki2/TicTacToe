@@ -1,5 +1,6 @@
 public class Checker {
     
+    // TODO: Add checkIsEmpty to each ConsCheck once hash map is implemented
     // Checks if the given location on the board is empty
     public static boolean checkIsEmpty(String[][] board, int row, int col) {
         if (board[row][col] != " ") {
@@ -61,6 +62,10 @@ public class Checker {
                 }
 
                 if (hCount == 2) {
+                    if (hIndex % 3 == 0) {
+                        hIndex -= 3;
+                    }
+                    // isEmpty here
                     return hIndex;
                 }
 
@@ -84,6 +89,10 @@ public class Checker {
                 }
 
                 if (vCount == 2) {
+                    if (vIndex == 7 || vIndex == 8 || vIndex == 9) {
+                        vIndex -= 7;
+                    }
+                    // isEmpty here
                     return vIndex;
                 }
 

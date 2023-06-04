@@ -1,9 +1,8 @@
 public class Checker {
     
-    // TODO: Add checkIsEmpty to each ConsCheck once hash map is implemented
     // Checks if the given location on the board is empty
     public static boolean checkIsEmpty(String[][] board, int row, int col) {
-        if (board[row][col] != " ") {
+        if (!board[row][col].equals(" ")) {
             return false;
         }
         return true;
@@ -18,9 +17,9 @@ public class Checker {
                     horizontalSame = false;
                 }
             }
-            if (horizontalSame) {
-                System.out.println("The winner was " + board[r]);
-                return horizontalSame;
+            if (horizontalSame && board[r][0] != " ") {
+                System.out.println("The winner was " + "'" + board[r][0] + "'!");
+                return true;
             }
         }
 
@@ -32,19 +31,21 @@ public class Checker {
                     verticalSame = false;
                 }
             }
-            if (verticalSame) {
-                System.out.println("The winner was " + board[c]);
-                return verticalSame;
+            if (verticalSame && board[0][c] != " ") {
+                System.out.println("The winner was " + "'" + board[0][c] +"'!");
+                return true;
             }
         }
 
         // Diagonal checks for whether someone won
-        if (board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])) {
+        if (!board[0][0].equals(" ") && board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])) {
+            System.out.println("The winner was " + "'" + board[0][0] + "'!");
             return true;
         }
-        if (board[2][0].equals(board[1][1]) && board[1][1].equals(board[0][2])) {
+        if (!board[2][0].equals(" ") && board[2][0].equals(board[1][1]) && board[1][1].equals(board[0][2])) {
+            System.out.println("The winner was " + "'" + board[2][0] +"'!");
             return true;
-        }
+        } 
         
         return false;
     }
@@ -62,10 +63,6 @@ public class Checker {
                 }
 
                 if (hCount == 2) {
-                    if (hIndex % 3 == 0) {
-                        hIndex -= 3;
-                    }
-                    // isEmpty here
                     return hIndex;
                 }
 
@@ -89,10 +86,6 @@ public class Checker {
                 }
 
                 if (vCount == 2) {
-                    if (vIndex == 7 || vIndex == 8 || vIndex == 9) {
-                        vIndex -= 7;
-                    }
-                    // isEmpty here
                     return vIndex;
                 }
 

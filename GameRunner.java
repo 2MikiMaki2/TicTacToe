@@ -4,33 +4,48 @@ public class GameRunner {
     private static boolean runGame(String s){
         Scanner scan = new Scanner(System.in);
         GameBoard board = new GameBoard();
-        
+        ComputerPlayer ai = new ComputerPlayer();
+
         int odd = 0;
         System.out.print("Alright, you're " + s + "!");
         if (s.equalsIgnoreCase("x")){
             System.out.println (" You go first!");
             odd = 1;
+            ai.setLetter("o");
         }
         else if (s.equalsIgnoreCase("o")){
             System.out.println (" You go second!");
             odd = 0;
+            ai.setLetter("x");
         }
         else{
             return false;
         }
-        for (int i = 1; i <= 10; i++){
+
+        for (int i = 1; i <= 9; i++){
             if (i % 2 == odd){
                 int num1 = 10;
-                while(!board.placeMove(num1, "x")){
+                while (!board.placeMove(num1, s)){
                     System.out.println("Pick a number from 1-9!");
                     num1 = scan.nextInt();
                 }
+                System.out.println(board);
+                if (Checker.winCheck(board.getBoard())){
+                    return true;
+                }
             }
-            System.out.println(board.getBoard());
-            if (Checker.winCheck(board.getBoard())){
-                return true;
+
+            else {
+                System.out.println ("Now, the computer goes!");
+                ai.compMove(board);
+                System.out.println(board);
+                if (Checker.winCheck(board.getBoard())){
+                    return true;
+                }
             }
         }
+        System.out.println ("Nobody wins, it's a draw!");
+        scan.close();
         return false;
     }
 
@@ -61,5 +76,6 @@ public class GameRunner {
                 System.out.println("Fine! See you next time!");
                 break;
         }   
+        scan.close();
     }
 }

@@ -3,7 +3,6 @@ public class GameRunner {
     
     private static boolean runGame(String s){
         Scanner scan = new Scanner(System.in);
-        Checker check = new Checker();
         GameBoard board = new GameBoard();
         
         int odd = 0;
@@ -28,10 +27,11 @@ public class GameRunner {
                 }
             }
             System.out.println(board.getBoard());
-            if (check.winCheck(board.getBoard())){
+            if (Checker.winCheck(board.getBoard())){
                 return true;
             }
         }
+        return false;
     }
 
     public static void main(String[] args){

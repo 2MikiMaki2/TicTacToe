@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class GameBoard{
     private String[][] board;
-    HashMap<Integer, Position> move;
+    HashMap<Integer, Position> move;{
     move  = new HashMap<Integer, Position>();
         move.put(1, new Position(0, 0));
         move.put(2, new Position(0, 1));
@@ -13,6 +13,7 @@ public class GameBoard{
         move.put(7, new Position(2, 0));
         move.put(8, new Position(2, 1));
         move.put(9, new Position(2, 2));
+        }
 
     public GameBoard(){
         board = new String[3][3];
@@ -24,8 +25,7 @@ public class GameBoard{
             return false;
         }
         Position p = move.get(num1);
-        Checker check = new Checker();
-        if (!check.checkIsEmpty(board, p.row, p.col)){
+        if (!Checker.checkIsEmpty(board, p.row, p.col)){
             return false;
         }
         System.out.println("Placing an x at (" + p.row + ", " + p.col + ")!");

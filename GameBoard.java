@@ -17,7 +17,23 @@ public class GameBoard{
 
     public GameBoard(){
         board = new String[3][3];
+        for (int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                board[i][j] = " ";
+            }
+        }
 
+    }
+
+    public String toString(){
+        String result = "";
+        for (int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                result += board[i][j] + "| ";
+            }
+            result += "\n";
+        }
+        return result;
     }
 
     public boolean placeMove(int num1, String a){

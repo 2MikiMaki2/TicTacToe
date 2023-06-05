@@ -6,4 +6,12 @@ public class Position {
         row = r;
         col = c;
     }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
 }

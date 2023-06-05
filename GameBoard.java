@@ -29,9 +29,16 @@ public class GameBoard{
         String result = "";
         for (int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                result += board[i][j] + "| ";
+                if (j == 2) {
+                    result += board[i][j];
+                } else {
+                    result += board[i][j] + " | ";
+                }
             }
-            result += "\n";
+            if (i == 2) {
+                return result;
+            }
+            result += "\n---------\n";
         }
         return result;
     }
@@ -44,7 +51,7 @@ public class GameBoard{
         if (!Checker.checkIsEmpty(board, p.row, p.col)){
             return false;
         }
-        System.out.println("Placing an x at (" + p.row + ", " + p.col + ")!");
+        System.out.println("Placing an " + a + " at (" + p.row + ", " + p.col + ")!");
         board[p.row][p.col] = a;
         return true;
     }
@@ -52,4 +59,9 @@ public class GameBoard{
     public String[][] getBoard(){
         return board;
     }
+
+    public HashMap<Integer, Position> getHash() {
+        return move;
+    }
+
 }  

@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class Checker {
     
     // Checks if the given location on the board is empty

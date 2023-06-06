@@ -148,9 +148,27 @@ public class Checker {
         return -1;
     }
 
-    public static int cConsCheck(String[][] board, String letter) {
+    public static int cConsCheck(GameBoard gBoard, String letter) {
         // Checks if two corners are equal with empty space between them
-
+        String[][] board = gBoard.getBoard();
+        if (board[0][0].equals(letter) && board[0][2].equals(letter) && checkIsEmpty(board, 0, 1)) {
+            return 2;
+        }
+        if (board[2][0].equals(letter) && board[2][2].equals(letter) && checkIsEmpty(board, 2, 1)) {
+            return 8;
+        }
+        if (board[0][0].equals(letter) && board[2][0].equals(letter) && checkIsEmpty(board, 1, 0)) {
+            return 4;
+        }
+        if (board[0][2].equals(letter) && board[2][2].equals(letter) && checkIsEmpty(board, 1, 2)) {
+            return 6;
+        }
+        if (board[0][0].equals(letter) && board[2][2].equals(letter) && checkIsEmpty(board, 1, 1)) {
+            return 5;
+        }
+        if (board[2][0].equals(letter) && board[0][2].equals(letter) && checkIsEmpty(board, 1, 1)) {
+            return 5;
+        }
 
         return -1;
     }

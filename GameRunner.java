@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class GameRunner {
     
-    // TODO: Add try and except to check if player input is valid
     // TODO: Implement serialization (on what?)
     private static boolean runGame(String s){
         Scanner scan = new Scanner(System.in);
@@ -65,10 +64,11 @@ public class GameRunner {
         
         System.out.println("Hi! Welcome to Tic-Tac-Toe! Do you wanna play a game?");
         System.out.println("Type 'Y' for yes, or type 'N' for no!");
-        
         String response = scan.nextLine();
+        response.toLowerCase();
+        
         switch (response){
-            case "Y":
+            case "y":
                 System.out.println("Alright, let's play!");
                 String response2 = "";
                 int exOrOh = (int)(Math.random() * 10 + 1);
@@ -83,7 +83,7 @@ public class GameRunner {
                 
                 break;
             
-            case "N":
+            case "n":
                 System.out.println("Fine! See you next time!");
                 break;
         }   

@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.InputMismatchException;
 
 public class GameBoard{
     private String[][] board;

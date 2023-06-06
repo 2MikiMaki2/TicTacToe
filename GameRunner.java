@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class GameRunner {
     
     // TODO: Add try and except to check if player input is valid
@@ -23,11 +24,19 @@ public class GameRunner {
 
         for (int i = 1; i <= 9; i++){
             if (i % 2 == odd){
-                int num1 = 10;
-                while (!board.placeMove(num1, s)){
-                    System.out.println("Pick a number from 1-9!");
-                    num1 = scan.nextInt();
-                }
+                boolean isMoveAvail = false;
+                do {
+                    try {
+                        System.out.println("Pick a number from 1-9.");
+                        // Use of scanner class is unpreferred for exception handling. This handles if player inputs string instead of int, but only some cases.
+                        int num1 = scan.nextInt();
+                        board.placeMove(num1, s);
+                        isMoveAvail = true;
+                    } catch (Exception e) {
+                        System.out.println("Invalid input: " + e.getMessage());
+                        scan.next();
+                    }
+                } while (!isMoveAvail);
                 System.out.println(board);
                 if (Checker.winCheck(board.getBoard())){
                     System.out.println("You win! Good game.");;

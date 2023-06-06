@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.InputMismatchException;
 
 public class GameBoard{
     private String[][] board;
@@ -43,17 +44,16 @@ public class GameBoard{
         return result;
     }
 
-    public boolean placeMove(int num1, String a){
+    public void placeMove(int num1, String a){
         if (num1 > 9 || num1 < 1){
-            return false;
+            throw new IllegalArgumentException("That's out of the valid range. Try again.");
         }
         Position p = move.get(num1);
         if (!Checker.checkIsEmpty(board, p.row, p.col)){
-            return false;
+            throw new IllegalArgumentException("That spot is not empty. Try again.");
         }
         System.out.println("Placing an " + a + " at (" + p.row + ", " + p.col + ")!");
         board[p.row][p.col] = a;
-        return true;
     }
 
     public String[][] getBoard(){

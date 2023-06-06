@@ -1,7 +1,14 @@
+import java.io.Serializable;
 import java.util.HashMap;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
-public class GameBoard{
+public class GameBoard implements Serializable{
     private String[][] board;
+    private static final long serialVersionUID = 1L;
     HashMap<Integer, Position> move;{
     move  = new HashMap<Integer, Position>();
         move.put(1, new Position(0, 0));
@@ -63,4 +70,37 @@ public class GameBoard{
         return move;
     }
 
-}  
+    public void save(String fileName){
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.close();
+            fos.close();
+        }catch(IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public static GameBoard load(String fileName){
+        try{
+            FileInputStream fis = new FileInputStream(fileName);
+ 
+	         //Creating ObjectOutputStream object.
+	         ObjectInputStream ois = new ObjectInputStream(fis);
+ 
+	         //write object.
+	         GameBoard b = (GameBoard) ois.readObject();
+ 
+	         //close streams.
+	         ois.close();
+	         fis.close();
+            return b;
+	      }catch(Exception e)
+	      {
+	          System.out.println(e);
+	      }
+          return null;
+    }
+}

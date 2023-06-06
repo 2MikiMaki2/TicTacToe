@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.util.Scanner;
 
 public class GameRunner {
@@ -27,13 +28,13 @@ public class GameRunner {
                 do {
                     try {
                         System.out.println("Pick a number from 1-9.");
-                        // Use of scanner class is unpreferred for exception handling. This handles if player inputs string instead of int, but only some cases.
-                        int num1 = scan.nextInt();
+                        Console console = System.console();
+                        String playerMove = console.readLine();
+                        int num1 = Integer.parseInt(playerMove);
                         board.placeMove(num1, s);
                         isMoveAvail = true;
                     } catch (Exception e) {
                         System.out.println("Invalid input: " + e.getMessage());
-                        scan.next();
                     }
                 } while (!isMoveAvail);
                 System.out.println(board);

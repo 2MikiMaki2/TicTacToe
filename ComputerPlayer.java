@@ -28,10 +28,6 @@ public class ComputerPlayer {
         if (dWinMove != -1) {
             return dWinMove;
         }
-        int cWinMove = Checker.cConsCheck(board, letter);
-        if (cWinMove != -1) {
-            return cWinMove;
-        }
 
         // Second search if blocking move can be made
         int hBlockMove = Checker.hConsCheck(board, oppLetter);
@@ -45,10 +41,6 @@ public class ComputerPlayer {
         int dBlockMove = Checker.dConsCheck(board, oppLetter);
         if (dBlockMove != -1) {
             return dBlockMove;
-        }
-        int cBlockMove = Checker.cConsCheck(board, oppLetter);
-        if (cBlockMove != -1) {
-            return cBlockMove;
         }
 
         // Third check if corners are empty or center is empty

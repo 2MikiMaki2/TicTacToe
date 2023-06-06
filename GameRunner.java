@@ -1,10 +1,13 @@
 import java.util.Scanner;
+import java.io.Console;
+
 public class GameRunner {
     
     // Add try and except to check if player input is valid
     // Implement serialization (on what?)
     private static GameBoard runGame(String s){
         Console console = System.console();
+
         GameBoard board = new GameBoard();
         ComputerPlayer ai = new ComputerPlayer();
 
@@ -27,7 +30,6 @@ public class GameRunner {
                 do {
                     try {
                         System.out.println("Pick a number from 1-9.");
-                        Console console = System.console();
                         String playerMove = console.readLine();
                         int num1 = Integer.parseInt(playerMove);
                         board.placeMove(num1, s);
@@ -55,7 +57,6 @@ public class GameRunner {
             }
         }
         System.out.println ("Nobody wins, it's a draw!");
-        scan.close();
         return board;
     }
 
@@ -69,7 +70,7 @@ public class GameRunner {
             System.out.println("\tType 'V' to view a saved game");
             System.out.println("\tType 'X' to exit the game");
             
-            String response = scan.nextLine();
+            String response = Utils.input("");
             switch (response.toUpperCase()){
                 case "N":
                     System.out.println("Alright, let's play!");
@@ -83,8 +84,9 @@ public class GameRunner {
                         response2 = "o";
                     }
                     GameBoard board = runGame(response2);
-                    System.out.println ("That was a good game! Enter a file name to save this game! Otherwise, press the 'enter' key to skip this step!");
-                    String fileName = scan.nextLine();
+                    //System.out.println ("That was a good game! Enter a file name to save this game! Otherwise, press the 'enter' key to skip this step!");
+                    //String fileName = console.readLine();
+                    String fileName = Utils.input("That was a good game! Enter a file name to save this game! Otherwise, press the 'enter' key to skip this step!");
                     if (!fileName.equals("")){
                         board.save(fileName);
                     }
@@ -92,12 +94,11 @@ public class GameRunner {
                 
                 case "X":
                     System.out.println("Fine! See you next time!");
-                    scan.close();  
                     return;
 
                 case "V":
                     System.out.println("Please enter the file name!");
-                    fileName = scan.nextLine();
+                    fileName = console.readLine();
                     GameBoard g = GameBoard.load(fileName);
                     if (g != null){
                         System.out.println(g);

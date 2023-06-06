@@ -87,7 +87,7 @@ public class GameBoard implements Serializable{
         try{
             FileInputStream fis = new FileInputStream(fileName);
  
-	         //Creating ObjectOutputStream object.
+	         //Creating ObjectInputStream object.
 	         ObjectInputStream ois = new ObjectInputStream(fis);
  
 	         //write object.
